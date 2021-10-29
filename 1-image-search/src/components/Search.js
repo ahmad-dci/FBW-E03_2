@@ -5,11 +5,12 @@ import { loadingAction, doneAction, errorAction, noDataAction } from '../actions
 export default function Search() {
     const [searchWord, setSearchWord] = useState('');
     const [color, setColor] = useState('');
+    const [category, setCategory] = useState('');
     const mainState = useContext(StorageContext);
 
     const searchBtnClick = () => {
         mainState.dispatch(loadingAction());
-        getData(searchWord, color).then(data => {
+        getData(searchWord, color, category).then(data => {
             if (data.hits.length) {
                 mainState.dispatch(doneAction(data.hits))
             } else {
@@ -63,6 +64,39 @@ export default function Search() {
                         <option value="gray">gray</option>
                         <option value="black">black</option>
                         <option value="brown">brown</option>
+                    </select>
+                </div>
+            </div>
+            <div className="col-12">
+                <div className="input-group mb-3 mt-3">
+                    <div className="input-group-prepend">
+                        <label className="input-group-text" >Category</label>
+                    </div>
+                    <select className="form-control" 
+                    value={category}
+                    onChange={e => setCategory(e.target.value)}
+                    >
+                        <option value="">Choose...</option>
+                        <option value="backgrounds">backgrounds</option>
+                        <option value="fashion">fashion</option>
+                        <option value="nature">nature</option>
+                        <option value="science">science</option>
+                        <option value="education">education</option>
+                        <option value="feelings">feelings</option>
+                        <option value="health">health</option>
+                        <option value="people">people</option>
+                        <option value="religion">religion</option>
+                        <option value="places">places</option>
+                        <option value="animals">animals</option>
+                        <option value="industry">industry</option>
+                        <option value="computer">computer</option>
+                        <option value="food">food</option>
+                        <option value="sports">sports</option>
+                        <option value="transportation">transportation</option>
+                        <option value="travel">travel</option>
+                        <option value="buildings">buildings</option>
+                        <option value="business">business</option>
+                        <option value="music">music</option>
                     </select>
                 </div>
             </div>
