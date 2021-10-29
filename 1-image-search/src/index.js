@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Gallery from './components/Gallery';
 import Search from './components/Search';
 import { StorageProvider } from './contexts';
 
@@ -8,6 +9,7 @@ export default function App() {
         <StorageProvider>
             <div className="container">
                 <Search />
+                <Gallery />
             </div>
         </StorageProvider>
     )

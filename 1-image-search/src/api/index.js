@@ -4,6 +4,7 @@ export const getData = (keyWord) => {
         fetch(url).then(response => {
             if (response.status === 200) {
                 response.json().then(data => {
+                    //setTimeout(() => {}, 2000)
                     resolve(data)
                 }).catch(error => {
                     reject(error)
