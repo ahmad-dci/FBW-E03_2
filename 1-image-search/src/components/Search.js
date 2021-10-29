@@ -1,12 +1,14 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { getData } from '../api';
 import { StorageContext } from '../contexts';
-import { loadingAction, doneAction, errorAction, noDataAction } from '../actions'
+import { loadingAction, doneAction, errorAction, noDataAction, extendAction } from '../actions'
 export default function Search() {
     const [searchWord, setSearchWord] = useState('');
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('');
+    const [page, setPage] = useState(1);
     const mainState = useContext(StorageContext);
+
 
     const searchBtnClick = () => {
         mainState.dispatch(loadingAction());
@@ -23,6 +25,38 @@ export default function Search() {
             console.log(error);
         })
     }
+
+    useEffect(() => {
+        const root = document.querySelector('#root')
+        const scrollEvent = () => {
+            if (root.offsetHeight + root.scrollTop >= root.scrollHeight) {
+                console.log('scrolled to bottom')
+                // to get next page data
+                getData(searchWord, color, category, page + 1).then(data => {
+                    if (data.hits.length) {
+                        setPage(page + 1);
+                        mainState.dispatch(extendAction(data.hits))
+                    } else {
+                        mainState.dispatch(noDataAction())
+                    }
+        
+                    console.log(data);
+                }).catch(error => {
+                    mainState.dispatch(errorAction())
+                    console.log(error);
+                })
+            }
+        };
+
+        if(mainState.state.searchResult.length) {
+            root.addEventListener('scroll', scrollEvent)
+        } else {
+            root.removeEventListener('scroll', scrollEvent)
+        }
+        
+        
+    }, [mainState.state.searchResult])
+
 
     console.log(color);
     return (
@@ -45,9 +79,9 @@ export default function Search() {
                     <div className="input-group-prepend">
                         <label className="input-group-text" >Color</label>
                     </div>
-                    <select className="form-control" 
-                    value={color}
-                    onChange={e => setColor(e.target.value)}
+                    <select className="form-control"
+                        value={color}
+                        onChange={e => setColor(e.target.value)}
                     >
                         <option value="">Choose...</option>
                         <option value="grayscale">grayscale</option>
@@ -72,9 +106,9 @@ export default function Search() {
                     <div className="input-group-prepend">
                         <label className="input-group-text" >Category</label>
                     </div>
-                    <select className="form-control" 
-                    value={category}
-                    onChange={e => setCategory(e.target.value)}
+                    <select className="form-control"
+                        value={category}
+                        onChange={e => setCategory(e.target.value)}
                     >
                         <option value="">Choose...</option>
                         <option value="backgrounds">backgrounds</option>
@@ -99,6 +133,19 @@ export default function Search() {
                         <option value="music">music</option>
                     </select>
                 </div>
+            </div>
+            <div className="col-12">
+                <nav >
+                    <ul className="pagination justify-content-center">
+                        <li className="page-item disabled">
+                            <a className="page-link" href="#">Previous</a>
+                        </li>
+
+                        <li className="page-item">
+                            <a className="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     )

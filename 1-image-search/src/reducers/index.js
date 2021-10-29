@@ -14,6 +14,14 @@ export const reducer = (state = storage, action) => {
                 chosenIdx: null
             }
             return state;
+        case 'EXTEND':
+            state = {
+                ...state,
+                searchResult: [...state.searchResult, ...action.payload],
+                searchStatus: 'done',
+                chosenIdx: null
+            }
+            return state;
         case 'ERROR':
             state = {
                 ...state,

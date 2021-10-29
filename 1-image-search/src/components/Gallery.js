@@ -49,6 +49,7 @@ export default function Gallery() {
             result = '';
             break;
     }
+    
     return (
         <div className="row">
             {result}

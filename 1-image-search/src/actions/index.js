@@ -4,6 +4,12 @@ export const doneAction = data => {
         payload: data
     })
 }
+export const extendAction = data => {
+    return ({
+        type: 'EXTEND',
+        payload: data
+    })
+}
 export const errorAction = () => {
     return ({
         type: 'ERROR'

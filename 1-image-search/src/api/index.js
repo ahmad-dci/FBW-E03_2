@@ -1,8 +1,9 @@
-export const getData = (keyWord, color, category) => {
+export const getData = (keyWord, color, category, page) => {
     return new Promise((resolve, reject) => {
         const url = `https://pixabay.com/api/?key=23836825-d28900a4f5025893278996a18&q=${keyWord}` + 
         (color ? `&colors=${color}` : '') + 
-        (category ? `&category=${category}` : '') 
+        (category ? `&category=${category}` : '') +
+        (page ? `&page=${page}` : '')
 
         
         fetch(url).then(response => {
