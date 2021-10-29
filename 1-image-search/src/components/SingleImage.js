@@ -13,7 +13,7 @@ export default function SingleImage() {
                     <img 
                     className="img-fluid" 
                     src={url} 
-                    alt='the single Image' />
+                    alt='the single ' />
                 </div>
     }
     return (

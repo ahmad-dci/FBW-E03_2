@@ -25,38 +25,34 @@ export default function Search() {
             console.log(error);
         })
     }
+const handleScroll = () => {
+        let userScrollHeight = window.innerHeight + window.scrollY;
+        let windowBottomHeight = document.documentElement.offsetHeight;
+        if (userScrollHeight >= windowBottomHeight) {
+            console.log(searchWord);
+            getData(searchWord, color, category, page + 1).then(data => {
+                if (data.hits.length) {
+                    setPage(page + 1);
+                    mainState.dispatch(extendAction(data.hits))
+                } else {
+                    window.removeEventListener("scroll", handleScroll);
+                }
+    
+            }).catch(error => {
+
+                console.log(error);
+            })
+        }
+    };
 
     useEffect(() => {
-        const root = document.querySelector('#root')
-        const scrollEvent = () => {
-            if (root.offsetHeight + root.scrollTop >= root.scrollHeight) {
-                console.log('scrolled to bottom')
-                // to get next page data
-                getData(searchWord, color, category, page + 1).then(data => {
-                    if (data.hits.length) {
-                        setPage(page + 1);
-                        mainState.dispatch(extendAction(data.hits))
-                    } else {
-                        mainState.dispatch(noDataAction())
-                    }
-        
-                    console.log(data);
-                }).catch(error => {
-                    mainState.dispatch(errorAction())
-                    console.log(error);
-                })
-            }
-        };
-
-        if(mainState.state.searchResult.length) {
-            root.addEventListener('scroll', scrollEvent)
-        } else {
-            root.removeEventListener('scroll', scrollEvent)
+        window.addEventListener("scroll", handleScroll); // attaching scroll event listener
+        return() => {
+            window.removeEventListener("scroll", handleScroll);
         }
-        
-        
-    }, [mainState.state.searchResult])
+    }, [searchWord, color, category, page]);
 
+    
 
     console.log(color);
     return (
@@ -134,19 +130,7 @@ export default function Search() {
                     </select>
                 </div>
             </div>
-            <div className="col-12">
-                <nav >
-                    <ul className="pagination justify-content-center">
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#">Previous</a>
-                        </li>
 
-                        <li className="page-item">
-                            <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
     )
 }
