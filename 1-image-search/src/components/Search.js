@@ -9,7 +9,7 @@ export default function Search() {
 
     const searchBtnClick = () => {
         mainState.dispatch(loadingAction());
-        getData(searchWord).then(data => {
+        getData(searchWord, color).then(data => {
             if (data.hits.length) {
                 mainState.dispatch(doneAction(data.hits))
             } else {
