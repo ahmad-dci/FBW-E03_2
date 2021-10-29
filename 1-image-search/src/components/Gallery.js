@@ -12,7 +12,22 @@ export default function Gallery() {
     let result = null;
     switch (mainState.state.searchStatus) {
         case 'done':
-            result = 'your data will be shown her';
+            //result = 'your data will be shown her';
+            result = mainState.state.searchResult.map(image => {
+                return (
+                    <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div className="card" style={{width: '18rem', objectFit: 'cover' }}>
+                            <img className="card-img-top" style={{height: '10rem'}} src={image.previewURL} alt="Card image cap" />
+                            <div className="card-body">
+                                <h5 className="card-title">{image.user}</h5>
+                                <p className="card-text">{image.tags}</p>
+                                <a href="#" className="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+
             break;
         case 'loading':
             result = 'loading...';
