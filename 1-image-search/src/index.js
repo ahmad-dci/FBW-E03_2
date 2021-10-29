@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Gallery from './components/Gallery';
 import Search from './components/Search';
+import SingleImage from './components/SingleImage';
 import { StorageProvider } from './contexts';
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
         <StorageProvider>
             <div className="container">
                 <Search />
+                <SingleImage />
                 <Gallery />
             </div>
         </StorageProvider>

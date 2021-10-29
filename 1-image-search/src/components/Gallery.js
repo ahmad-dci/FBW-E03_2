@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { chooseImageAction } from '../actions';
 import { StorageContext } from '../contexts'
 
 export default function Gallery() {
@@ -9,19 +10,25 @@ export default function Gallery() {
     // 2- searchStatus = 'loading' show [pending...]
     // 3- searchStatus = 'error' show [can not get any image, try again later]
     // 4- searchStatus = 'no_data' show [can not find any image]
+    const chooseImageClick = (imageIdx) => {
+        mainState.dispatch(chooseImageAction(imageIdx));
+    }
     let result = null;
     switch (mainState.state.searchStatus) {
         case 'done':
             //result = 'your data will be shown her';
-            result = mainState.state.searchResult.map(image => {
+            result = mainState.state.searchResult.map((image, idx) => {
                 return (
-                    <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                        <div className="card" style={{width: '18rem', objectFit: 'cover' }}>
+                    <div key={idx} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div className="card" style={{ objectFit: 'cover' }}>
                             <img className="card-img-top" style={{height: '10rem'}} src={image.previewURL} alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="card-title">{image.user}</h5>
                                 <p className="card-text">{image.tags}</p>
-                                <a href="#" className="btn btn-primary">Go somewhere</a>
+                                <a href="#" 
+                                className="btn btn-primary" 
+                                onClick={() => chooseImageClick(idx)}
+                                >Show</a>
                             </div>
                         </div>
                     </div>
