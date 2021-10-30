@@ -20,8 +20,8 @@ export default function Gallery() {
             result = mainState.state.searchResult.map((image, idx) => {
                 return (
                     <div key={idx} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                        <div className="card" style={{ objectFit: 'cover' }}>
-                            <img className="card-img-top" style={{height: '10rem'}} src={image.previewURL} alt="" />
+                        <div className="card">
+                            <img className="card-img-top" style={{height: '10rem', objectFit: 'cover' }} src={image.previewURL} alt="" />
                             <div className="card-body">
                                 <h5 className="card-title">{image.user}</h5>
                                 <p className="card-text">{image.tags}</p>
