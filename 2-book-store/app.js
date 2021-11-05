@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const emailSender = require('./models/emailSender');
 
 const app = express();
 
@@ -34,6 +35,13 @@ app.get('/contactus', (req, res) => {
 // get post data from contact us form
 app.post('/contactus', (req, res) => {
     console.log(req.body);
+    emailSender.sendEmail(req.body.name, req.body.email, req.body.message, (ok, result) => {
+        if(ok) {
+            res.json({result: 'done'})
+        } else {
+            res.json({result: 'error'})
+        }
+    });
 })
 
 app.listen(port, () => {
