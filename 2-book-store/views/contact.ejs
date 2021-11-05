@@ -153,10 +153,26 @@ http://www.tooplate.com/view/2092-shelf
 
             // send contact form to server side
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.addEventListener('click', e => {
+            const contactName = document.getElementById('contact_name');
+            const contactEmail = document.getElementById('contact_email');
+            const contactMessage = document.getElementById('contact_message');
+            submitBtn.addEventListener('click', async e => {
                 e.preventDefault();
                 // use fetch to send the data to server side
-
+                const sendData = {
+                    name: contactName.value,
+                    email: contactEmail.value,
+                    message: contactMessage.value
+                };
+                const response = await fetch('/contactus', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(sendData)
+                });
+                const result = await response.json();
+                console.log(result);
             })
 
         </script>             
