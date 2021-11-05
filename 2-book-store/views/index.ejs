@@ -30,27 +30,7 @@ http://www.tooplate.com/view/2092-shelf
     <body>
         
         <div class="container">
-            <header class="tm-site-header">
-                <h1 class="tm-site-name">Shelf</h1>
-                <p class="tm-site-description">Your Online Bookstore</p>
-                
-                <nav class="navbar navbar-expand-md tm-main-nav-container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tmMainNav" aria-controls="tmMainNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fa fa-bars"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse tm-main-nav" id="tmMainNav">
-                        <ul class="nav nav-fill tm-main-nav-ul">
-                            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Catalogs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                            <li class="nav-item"><a class="nav-link" href="team.html">Our Team</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                
-            </header>
+            <%- include('partials/header', {current: 'home'})  %> 
             
             <div class="tm-main-content">
                 <section class="tm-margin-b-l">
@@ -156,11 +136,7 @@ http://www.tooplate.com/view/2092-shelf
                 </section>
             </div>
 
-            <footer>
-                Copyright &copy; <span class="tm-current-year">2018</span> Shelf Company 
-                
-                - Designed by Tooplate
-            </footer>    
+            <%- include('partials/footer')%>    
         </div>
         
         <!-- load JS files -->

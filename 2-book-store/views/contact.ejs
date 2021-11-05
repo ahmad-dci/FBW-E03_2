@@ -30,27 +30,7 @@ http://www.tooplate.com/view/2092-shelf
     <body>
         
         <div class="container">
-            <header class="tm-site-header">
-                <h1 class="tm-site-name">Shelf</h1>
-                <p class="tm-site-description">Your Online Bookstore</p>
-                
-                <nav class="navbar navbar-expand-md tm-main-nav-container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tmMainNav" aria-controls="tmMainNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fa fa-bars"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse tm-main-nav" id="tmMainNav">
-                        <ul class="nav nav-fill tm-main-nav-ul">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Catalogs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                            <li class="nav-item"><a class="nav-link" href="team.html">Our Team</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="contact.html">Contact Us</a></li>
-                        </ul>
-                    </div>    
-                </nav>
-                
-            </header>
+            <%- include('partials/header', {current: 'contact'})  %>
             
             <div class="tm-main-content">
                 <section class="row tm-margin-b-l">
@@ -70,7 +50,7 @@ http://www.tooplate.com/view/2092-shelf
                                 <div class="form-group">
                                     <textarea id="contact_message" name="contact_message" class="form-control" rows="8" placeholder="Message" required></textarea>
                                 </div>
-                                <button type="submit" class="tm-btn tm-btn-blue float-right">Submit</button>
+                                <button id="submitBtn" type="submit" class="tm-btn tm-btn-blue float-right">Submit</button>
                             </form>                          
                         </div>                                       
                     </div>
@@ -116,11 +96,7 @@ http://www.tooplate.com/view/2092-shelf
                 </section>
             </div>
 
-            <footer>
-                Copyright &copy; <span class="tm-current-year">2018</span> Shelf Company 
-                
-                - Designed by Tooplate
-            </footer>    
+            <%- include('partials/footer')%>    
         </div>
         
         <!-- load JS files -->
@@ -173,6 +149,15 @@ http://www.tooplate.com/view/2092-shelf
                 $('.tm-current-year').text(new Date().getFullYear());
 
             });
+
+
+            // send contact form to server side
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.addEventListener('click', e => {
+                e.preventDefault();
+                // use fetch to send the data to server side
+
+            })
 
         </script>             
 
