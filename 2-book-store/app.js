@@ -44,6 +44,10 @@ app.post('/contactus', (req, res) => {
     });
 })
 
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
 app.listen(port, () => {
   console.log('Server is up and running on port number ' + port);
 });
