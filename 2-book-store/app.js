@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const emailSender = require('./models/emailSender');
-const db = require('./models/db')
+const db = require('./models/db');
 
 const app = express();
 

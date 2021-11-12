@@ -40,6 +40,7 @@ function connect() {
         } else {
             mongoose.connect(connectionString, {
                 useUnifiedTopology: true,
+                // useCreateIndex: true,
                 useNewUrlParser: true
             }).then(() => {
                 resolve()
