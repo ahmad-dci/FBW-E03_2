@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--
+    <!--
 
 Template 2092 Shelf
 
@@ -14,169 +15,146 @@ http://www.tooplate.com/view/2092-shelf
     <title>SHELF - Your Online Bookstore</title>
 
     <!-- load stylesheets -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
-    <link rel="stylesheet" href="css/tooplate-style.css">                                   <!-- Templatemo style -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Bootstrap style -->
+    <link rel="stylesheet" href="css/tooplate-style.css"> <!-- Templatemo style -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
           <![endif]-->
 </head>
 
-    <body>
-        
-        <div class="container">
-            <%- include('partials/header', {current: 'login'})  %>
-            
+<body>
+
+    <div class="container">
+        <%- include('partials/header', {current: 'login' }) %>
+
             <div class="tm-main-content">
                 <section class="row tm-margin-b-l">
-                    <div class="col-md-6 col-sm-12 mb-md-0 mb-5 tm-overflow-auto"> 
-                        <h2 class="tm-blue-text tm-margin-b-p">Login</h2>        
+                    <div class="col-md-6 col-sm-12 mb-md-0 mb-5 tm-overflow-auto">
+                        <h2 class="tm-blue-text tm-margin-b-p">Login</h2>
                         <div class="mr-lg-5">
                             <!-- contact form -->
                             <form action="#" method="post" class="tm-contact-form">
                                 <div class="form-group">
-                                    <input type="text" id="login_username"  class="form-control" placeholder="User Name"  required/>
+                                    <input type="text" id="login_username" class="form-control" placeholder="User Name"
+                                        required />
                                 </div>
-                                <div class="form-group">                                                        
-                                    <input type="password" id="login_password"  class="form-control" placeholder="password"  required/>
+                                <div class="form-group">
+                                    <input type="password" id="login_password" class="form-control"
+                                        placeholder="password" required />
                                 </div>
-                                
-                                <button id="loginBtn" type="submit" class="tm-btn tm-btn-blue float-right">Login</button>
-                            </form>                          
-                        </div>                                       
+
+                                <button id="loginBtn" type="submit"
+                                    class="tm-btn tm-btn-blue float-right">Login</button>
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12 mb-md-0 mb-5 tm-overflow-auto"> 
-                        <h2 class="tm-blue-text tm-margin-b-p">Register</h2>        
+                    <div class="col-md-6 col-sm-12 mb-md-0 mb-5 tm-overflow-auto">
+                        <h2 class="tm-blue-text tm-margin-b-p">Register</h2>
                         <div class="mr-lg-5">
                             <!-- contact form -->
                             <form action="#" method="post" class="tm-contact-form">
                                 <div class="form-group">
-                                    <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
-                                </div>
-                                <div class="form-group">                                                        
-                                    <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+                                    <input type="text" id="register_name" class="form-control"
+                                        placeholder="first & last name" required />
                                 </div>
                                 <div class="form-group">
-                                    <textarea id="contact_message" name="contact_message" class="form-control" rows="8" placeholder="Message" required></textarea>
+                                    <input type="email" id="register_email" class="form-control" placeholder="Email"
+                                        required />
                                 </div>
-                                <button id="submitBtn" type="submit" class="tm-btn tm-btn-blue float-right">Submit</button>
-                            </form>                          
-                        </div>                                       
+
+                                <div class="form-group">
+                                    <input type="text" id="register_username" class="form-control"
+                                        placeholder="User Name" required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="register_password" class="form-control"
+                                        placeholder="password" required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="register_repassword" class="form-control"
+                                        placeholder="re-password" required />
+                                </div>
+
+                                <button id="registerBtn" type="submit"
+                                    class="tm-btn tm-btn-blue float-right">register</button>
+                            </form>
+                        </div>
                     </div>
-                    
+
                 </section>
 
-                <section class="row tm-margin-b-l">
-                    <div class="col-12">
-                        <header>
-                            <h4 class="tm-blue-text tm-margin-b">Our Location</h4>
-                        </header>
-                        <div id="google-map"></div>
-                    </div>
-                </section>
+
 
                 <section class="media tm-highlight tm-highlight-w-icon">
 
                     <div class="tm-highlight-icon">
-                        <i class="fa tm-fa-6x fa-meetup"></i>    
-                    </div>                    
+                        <i class="fa tm-fa-6x fa-meetup"></i>
+                    </div>
 
                     <div class="media-body">
                         <header>
                             <h2>Need Help?</h2>
                         </header>
-                        <p class="tm-margin-b">Curabitur magna tellus, condimentum vitae consectetur id, elementum sit amet erat. Phasellus arcu leo, sagittis fringilla nisi et, pulvinar vestibulum mi. Maecenas mollis ullamcorper est at dignissim.</p>
+                        <p class="tm-margin-b">Curabitur magna tellus, condimentum vitae consectetur id, elementum sit
+                            amet erat. Phasellus arcu leo, sagittis fringilla nisi et, pulvinar vestibulum mi. Maecenas
+                            mollis ullamcorper est at dignissim.</p>
                         <a href="" class="tm-white-bordered-btn">Live Chat</a>
-                    </div>                    
+                    </div>
                 </section>
             </div>
 
-            <%- include('partials/footer')%>    
-        </div>
-        
-        <!-- load JS files -->
-        <script src="js/jquery-1.11.3.min.js"></script>         <!-- jQuery (https://jquery.com/download/) -->
-        <script src="js/popper.min.js"></script>                <!-- Popper (https://popper.js.org/) -->
-        <script src="js/bootstrap.min.js"></script>             <!-- Bootstrap (https://getbootstrap.com/) -->
-        <script>     
+            <%- include('partials/footer')%>
+    </div>
 
-            /* Google map
-            ------------------------------------------------*/
-            var map = '';
-            var center;
+    <!-- load JS files -->
+    <script src="js/jquery-1.11.3.min.js"></script> <!-- jQuery (https://jquery.com/download/) -->
+    <script src="js/popper.min.js"></script> <!-- Popper (https://popper.js.org/) -->
+    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap (https://getbootstrap.com/) -->
+    <script>
+        const registerBtn = document.getElementById('registerBtn');
+        registerBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const register_name = document.getElementById('register_name').value;
+            const register_email = document.getElementById('register_email').value;
+            const register_username = document.getElementById('register_username').value;
+            const register_password = document.getElementById('register_password').value;
+            const register_repassword = document.getElementById('register_repassword').value;
+            // we need to validate inputs
 
-            function initialize() {
-                var mapOptions = {
-                    zoom: 16,
-                    center: new google.maps.LatLng(37.769725, -122.462154),
-                    scrollwheel: false
-                };
-            
-                map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
-
-                google.maps.event.addDomListener(map, 'idle', function() {
-                  calculateCenter();
-                });
-            
-                google.maps.event.addDomListener(window, 'resize', function() {
-                  map.setCenter(center);
-                });
+            // send the data to server side using fetch 
+            const sendData = {
+                name: register_name,
+                email: register_email,
+                username: register_username,
+                password: register_password
             }
-
-            function calculateCenter() {
-                center = map.getCenter();
-            }
-
-            function loadGoogleMap(){
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
-				// use your own API key for Google Maps
-                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC_iLYB-9nzlBfwB18WEDTCMla3Cr97lsg&v=3.exp&sensor=false&' + 'callback=initialize';
-                document.body.appendChild(script);
-            } 
-       
-            $(document).ready(function(){
-
-                // Google Map
-                loadGoogleMap();  
-                
-                // Update the current year in copyright
-                $('.tm-current-year').text(new Date().getFullYear());
-
-            });
-
-
-            // send contact form to server side
-            const submitBtn = document.getElementById('submitBtn');
-            const contactName = document.getElementById('contact_name');
-            const contactEmail = document.getElementById('contact_email');
-            const contactMessage = document.getElementById('contact_message');
-            submitBtn.addEventListener('click', async e => {
-                e.preventDefault();
-                // use fetch to send the data to server side
-                const sendData = {
-                    name: contactName.value,
-                    email: contactEmail.value,
-                    message: contactMessage.value
-                };
-                const response = await fetch('/contactus', {
+            try {
+                const response = await fetch('/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(sendData)
-                });
-                const result = await response.json();
-                console.log(result);
-            })
+                })
+                
+            } catch (error) {
+                console.log(error);
+            }
 
-        </script>             
+
+
+
+        })
+    </script>
 
 </body>
+
 </html>

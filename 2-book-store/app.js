@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const emailSender = require('./models/emailSender');
+const db = require('./models/db')
 
 const app = express();
 
@@ -48,6 +49,19 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
+app.post('/register', async (req, res) => {
+    console.log(req.body);
+    const {name, email,username,password} = req.body;
+    const user = await db.registerUser(name, email, username, password);
+    console.log(user);
+    res.json('done');
+
+})
+
 app.listen(port, () => {
   console.log('Server is up and running on port number ' + port);
 });
+
+
+// mongodb+srv://<username>:<password>@cluster0.rmrmn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+// mongodb+srv://book_store_user:!234qweR@cluster0.rmrmn.mongodb.net/book_store_db?retryWrites=true&w=majority
