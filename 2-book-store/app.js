@@ -40,10 +40,10 @@ app.get('/contactus', (req, res) => {
 app.post('/contactus', (req, res) => {
     console.log(req.body);
     emailSender.sendEmail(req.body.name, req.body.email, req.body.message, (ok, result) => {
-        if(ok) {
-            res.json({result: 'done'})
+        if (ok) {
+            res.json({ result: 'done' })
         } else {
-            res.json({result: 'error'})
+            res.json({ result: 'error' })
         }
     });
 })
@@ -56,29 +56,54 @@ app.post('/register', async (req, res) => {
     // res.json, res.send, res.render, res.redirect, res.sendFile
     // make sure the previous command will run ONLY once
     console.log(req.body);
-    const {name, email,username,password} = req.body;
+    const { name, email, username, password } = req.body;
     try {
         const userByEmail = await db.checkUserEmail(email);
-        const userByUsername = await db.checkUserName(username); 
-        if(userByEmail) {
-            res.json({result: 'email exist'})
+        const userByUsername = await db.checkUserName(username);
+        if (userByEmail) {
+            res.json({ result: 'email exist' })
         } else {
             if (userByUsername) {
-                res.json({result: 'username exist'})
+                res.json({ result: 'username exist' })
             } else {
                 const user = await db.registerUser(name, email, username, password);
                 const result = await emailSender.confirmEmail(email, name, user.id);
-                res.json({result: 'done'})
+                res.json({ result: 'done' })
             }
         }
-    } catch(error) {
+    } catch (error) {
         console.log(error);
-        res.json({result: 'error'})
+        res.json({ result: 'error' })
     }
 })
 
+
+app.get('/confirm/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const result = await db.confirmEmail(id);
+        if (result) {
+            if (result.verified) {
+                res.send(`
+                <h1>Your email is already verified</h1>
+                <a href="/login">Go to login page</a>
+                `);
+            } else {
+                res.send(`
+        <h1>Thank you for confirming your email</h1>
+        <a href="/login">Go to home page</a>
+    `);
+            }
+        } else {
+            res.send(`your confirmation link is not valid`);
+        }
+    } catch (error) {
+        res.send(`your confirmation link is not valid`);
+    }
+});
+
 app.listen(port, () => {
-  console.log('Server is up and running on port number ' + port);
+    console.log('Server is up and running on port number ' + port);
 });
 
 

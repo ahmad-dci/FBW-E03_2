@@ -93,20 +93,42 @@ const registerUser = async (name, email, username, password) => {
     return savedUser;
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @returns 
+ */
 const checkUserName = async (username) => {
     await connect();
     const user = await Users.findOne({username});
     return user;
 }
+/**
+ * 
+ * @param {*} email 
+ * @returns 
+ */
 const checkUserEmail = async (email) => {
     await connect();
     const user = await Users.findOne({email});
     return user;
 }
 
+/**
+ * confirm user email by its Id
+ * @param {string} id 
+ * @returns 
+ */
+const confirmEmail = async (id) => {
+    await connect();
+    const user = await Users.findOneAndUpdate({_id: id}, {verified: true});
+    return user;
+}
+
 module.exports = {
     registerUser,
     checkUserName,
-    checkUserEmail
+    checkUserEmail,
+    confirmEmail
 }
 
