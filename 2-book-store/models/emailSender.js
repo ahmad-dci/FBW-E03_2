@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 function sendEmail(name, email, message, cb) {
     const mailOptions = {
-        from: 'fbwe03@coding-school.org',
+        from: process.env.EMAIL_USER,
         to: 'ahmad.osman@digitalcareerinstitute.org',
         subject: 'Message using your website from ' + name,
         text: 'Name: ' + name + '\n\n' + message + '\n\n' + 'Email: ' + email
@@ -29,4 +29,24 @@ function sendEmail(name, email, message, cb) {
     })
 }
 
-module.exports = {sendEmail}
+function confirmEmail(userEmail, name, id) {
+    return new Promise((resolve, reject) => {
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: userEmail,
+            subject: 'Confirm your email',
+            html: `<h1>Welcome to our website, ${name}!</h1>
+            <p>Please click on the link below to confirm your email address.</p>
+            <a href="${process.env.WEB_HOST}/confirm/${id}">Confirm email</a>`
+        };
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(info);
+            }
+        });
+    })
+}
+
+module.exports = {sendEmail, confirmEmail}

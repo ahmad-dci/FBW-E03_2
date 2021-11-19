@@ -67,10 +67,12 @@ app.post('/register', async (req, res) => {
                 res.json({result: 'username exist'})
             } else {
                 const user = await db.registerUser(name, email, username, password);
+                const result = await emailSender.confirmEmail(email, name, user.id);
                 res.json({result: 'done'})
             }
         }
     } catch(error) {
+        console.log(error);
         res.json({result: 'error'})
     }
 })
