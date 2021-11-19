@@ -144,6 +144,8 @@ http://www.tooplate.com/view/2092-shelf
                     },
                     body: JSON.stringify(sendData)
                 })
+                const data = await response.json();
+                console.log(data);
                 
             } catch (error) {
                 console.log(error);

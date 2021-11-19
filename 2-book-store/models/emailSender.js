@@ -1,11 +1,12 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config()
 
 const transporter = nodemailer.createTransport({
-    host: 'mail.coding-school.org',
+    host: process.env.EMAIL_HOST,
     port: 465,
     auth: {
-        user: "fbwe03@coding-school.org",
-        pass: "CodingSchool1"
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
     },
     tls: {
         rejectUnauthorized: false

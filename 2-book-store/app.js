@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const emailSender = require('./models/emailSender');
 const db = require('./models/db');
+require('dotenv').config()
+
+console.log('email_host', process.env.PORT);
 
 const app = express();
 
@@ -50,12 +53,26 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
+    // res.json, res.send, res.render, res.redirect, res.sendFile
+    // make sure the previous command will run ONLY once
     console.log(req.body);
     const {name, email,username,password} = req.body;
-    const user = await db.registerUser(name, email, username, password);
-    console.log(user);
-    res.json('done');
-
+    try {
+        const userByEmail = await db.checkUserEmail(email);
+        const userByUsername = await db.checkUserName(username); 
+        if(userByEmail) {
+            res.json({result: 'email exist'})
+        } else {
+            if (userByUsername) {
+                res.json({result: 'username exist'})
+            } else {
+                const user = await db.registerUser(name, email, username, password);
+                res.json({result: 'done'})
+            }
+        }
+    } catch(error) {
+        res.json({result: 'error'})
+    }
 })
 
 app.listen(port, () => {

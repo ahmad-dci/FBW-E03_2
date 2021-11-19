@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
+
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
@@ -31,7 +33,7 @@ const userSchema = new Schema({
 // create users model which will connect userSchema with users collection on database
 const Users = mongoose.model('users', userSchema);
 
-const connectionString = 'mongodb+srv://book_store_user:!234qweR@cluster0.rmrmn.mongodb.net/book_store_db?retryWrites=true&w=majority';
+const connectionString = process.env.DB_CONNECTION;
 
 function connect() {
     return new Promise((resolve, reject) => {
@@ -91,7 +93,20 @@ const registerUser = async (name, email, username, password) => {
     return savedUser;
 }
 
+const checkUserName = async (username) => {
+    await connect();
+    const user = await Users.findOne({username});
+    return user;
+}
+const checkUserEmail = async (email) => {
+    await connect();
+    const user = await Users.findOne({email});
+    return user;
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    checkUserName,
+    checkUserEmail
 }
 
