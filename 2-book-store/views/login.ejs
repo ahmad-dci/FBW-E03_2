@@ -159,6 +159,10 @@ http://www.tooplate.com/view/2092-shelf
                 password: register_password
             }
             try {
+                // disable the register button
+                registerBtn.disabled = true;
+                registerBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+
                 const response = await fetch('/register', {
                     method: 'POST',
                     headers: {
@@ -167,6 +171,10 @@ http://www.tooplate.com/view/2092-shelf
                     body: JSON.stringify(sendData)
                 })
                 const data = await response.json();
+                // enable register button
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = 'register';
+                
                 console.log(data);
                 switch (data.result) {
                     case 'email exist':
@@ -194,9 +202,6 @@ http://www.tooplate.com/view/2092-shelf
                 console.log(error);
                 showModal('Error', 'Can not send the data', 'bg-danger');
             }
-
-
-
 
         })
 
