@@ -114,6 +114,28 @@ http://www.tooplate.com/view/2092-shelf
             <%- include('partials/footer')%>
     </div>
 
+    <!-- messages modal start -->
+
+    <div id="modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+              <h5 class="modal-title" id="modalTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id="modalContent">Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- messages modal End -->
+
     <!-- load JS files -->
     <script src="js/jquery-1.11.3.min.js"></script> <!-- jQuery (https://jquery.com/download/) -->
     <script src="js/popper.min.js"></script> <!-- Popper (https://popper.js.org/) -->
@@ -146,15 +168,48 @@ http://www.tooplate.com/view/2092-shelf
                 })
                 const data = await response.json();
                 console.log(data);
+                switch (data.result) {
+                    case 'email exist':
+                        showModal('Email already exist', 'Please use another email', 'bg-warning');
+                        break;
+                    case 'username exist':
+                        showModal('user name is already exist', 'Please use another user name', 
+                        'bg-warning');
+                        break;
+                    case 'done':
+                        showModal('Done',
+                         'You have been registered successfully, please check your email to verify',
+                          'bg-success');
+                        break;
+                    case 'error':
+                        showModal('Error', 'Unknown Error please contact the Admin', 'bg-danger');
+                        break;
+                
+                    default:
+                        showModal('Error', 'Unknown Error please contact the Admin', 'bg-danger');
+                        break;
+                }
                 
             } catch (error) {
                 console.log(error);
+                showModal('Error', 'Can not send the data', 'bg-danger');
             }
 
 
 
 
         })
+
+
+        function showModal(title, content, headerClass) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const modalHeader = document.getElementById('modalHeader');
+            modalTitle.innerHTML = title;
+            modalContent.innerHTML = content;
+            modalHeader.className = `modal-header ${headerClass}`;
+            $('#modal').modal('show');
+        }
     </script>
 
 </body>
