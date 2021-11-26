@@ -203,7 +203,65 @@ http://www.tooplate.com/view/2092-shelf
                 showModal('Error', 'Can not send the data', 'bg-danger');
             }
 
-        })
+        });
+
+        const loginBtn = document.getElementById('loginBtn');
+        // add event listener to login button
+        loginBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const login_username = document.getElementById('login_username').value;
+            const login_password = document.getElementById('login_password').value;
+            // we need to validate inputs
+            // send the data to server side using fetch 
+            const sendData = {
+                username: login_username,
+                password: login_password
+            }
+            try {
+                // disable the login button
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(sendData)
+                })
+                const data = await response.json();
+                // enable login button
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = 'login';
+                console.log(data);
+                switch (data.result) {
+                    case 'done':
+                        window.location.href = '/admin';
+                        break;
+                    case 'user is not exist':
+                        showModal('User is not exist', 'Please register first', 'bg-warning');
+                        break;
+                    case 'password is not correct':
+                        showModal('Password is not correct', 'Please check your password', 'bg-warning');
+                        break;
+                    case 'email is not verified':
+                        showModal('Email is not verified', 'Please check your email to verify', 'bg-warning');
+                        break;
+                    case 'error':
+                        showModal('Error', 'Unknown Error please contact the Admin', 'bg-danger');
+                        break;
+                
+                    default:
+                        showModal('Error', 'Unknown Error please contact the Admin', 'bg-danger');
+                        break;
+                }
+                
+            } catch (error) {
+                console.log(error);
+                showModal('Error', 'Can not send the data', 'bg-danger');
+            }
+
+        });
 
 
         function showModal(title, content, headerClass) {
@@ -215,6 +273,9 @@ http://www.tooplate.com/view/2092-shelf
             modalHeader.className = `modal-header ${headerClass}`;
             $('#modal').modal('show');
         }
+
+
+        
     </script>
 
 </body>

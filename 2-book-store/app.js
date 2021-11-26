@@ -52,6 +52,19 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
+app.post('/login', async (req, res) => {
+    console.log(req.body);
+    const {username, password} = req.body;
+    const user = await db.checkUserName(username);
+    if (user) {
+        // check password
+
+    } else {
+        res.json({ result: 'user is not exist' })
+    }
+
+})
+
 app.post('/register', async (req, res) => {
     // res.json, res.send, res.render, res.redirect, res.sendFile
     // make sure the previous command will run ONLY once
@@ -107,5 +120,7 @@ app.listen(port, () => {
 });
 
 
-// mongodb+srv://<username>:<password>@cluster0.rmrmn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-// mongodb+srv://book_store_user:!234qweR@cluster0.rmrmn.mongodb.net/book_store_db?retryWrites=true&w=majority
+// task: 
+// 1- send the login data: [username, password ] when the user click login
+// 2- use fetch with 'POST' method to send the data to the server
+// 3- in the server side [app.js] just log the data to the console
