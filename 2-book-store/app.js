@@ -2,7 +2,11 @@ const express = require('express');
 const path = require('path');
 const emailSender = require('./models/emailSender');
 const db = require('./models/db');
-require('dotenv').config()
+require('dotenv').config();
+const bcrypt = require('bcryptjs');
+const session = require('express-session');
+
+const adminRouter = require('./routes/adminroutes');
 
 console.log('email_host', process.env.PORT);
 
@@ -19,6 +23,15 @@ app.use(express.json());
 
 // set public folder 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// set up session
+app.use(session({
+    secret: 'bookstore',
+    cookie: { maxAge: 10 * 1000 },
+}))
+
+// any route starts with /admin/ will be handled by adminRouter
+app.use('/admin', adminRouter);
 
 app.get('/', (req, res) => {
     //console.log(__dirname);
@@ -52,12 +65,30 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
+
 app.post('/login', async (req, res) => {
     console.log(req.body);
     const {username, password} = req.body;
     const user = await db.checkUserName(username);
     if (user) {
-        // check password
+        // check user if verified
+        if (user.verified) {
+            // check the password
+            bcrypt.compare(password, user.password, (err, result) => {
+                if (result) {
+                    // password correct
+                    // set session for user
+                    req.session.user = user;
+                    res.json({ result: 'done' });
+                } else {
+                    // password incorrect
+                    res.json({ result: 'password is not correct' });
+                }
+            })
+
+        } else {
+            res.json({ result: 'email is not verified' })
+        }
 
     } else {
         res.json({ result: 'user is not exist' })
