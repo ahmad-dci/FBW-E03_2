@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
+const bcrypt = require('bcryptjs');
 
 
 const Schema = mongoose.Schema;
@@ -86,7 +87,7 @@ const registerUser = async (name, email, username, password) => {
         name,
         email,
         username, 
-        password,
+        password : await encrypt(password),
         verified: false
     })
     const savedUser = await newUser.save();
@@ -125,10 +126,26 @@ const confirmEmail = async (id) => {
     return user;
 }
 
+const encrypt = (password) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hash) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(hash)
+            }
+        })
+    })
+} 
+
 module.exports = {
     registerUser,
     checkUserName,
     checkUserEmail,
     confirmEmail
 }
+
+
+// encrypted password of '12345678' '$2a$10$cqsRVcMshJsXDfR2wbI41.0at11Zc06vvPPnlzLZh0pKr6qNlsx/C'
+//                                   $2a$10$J25zUdmE/5PV.z3AnMiWWe6rj8.uCgm9xtdG/s0cGy48eRxGXmz6G
 
