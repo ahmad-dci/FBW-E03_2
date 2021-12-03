@@ -22,6 +22,10 @@ adminRouter.get('/logout', (req, res) => {
     res.redirect('/');
 })
 
+adminRouter.get('/addbook', (req, res) => {
+    res.render('addbook')
+})
+
 
 
 module.exports = adminRouter;
