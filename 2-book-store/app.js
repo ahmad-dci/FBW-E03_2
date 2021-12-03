@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // set up session
 app.use(session({
     secret: 'bookstore',
-    cookie: { maxAge: 10 * 1000 },
+    cookie: { maxAge: 5 * 60 * 1000 },
 }))
 
 // any route starts with /admin/ will be handled by adminRouter

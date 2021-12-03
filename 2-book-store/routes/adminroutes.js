@@ -14,7 +14,12 @@ adminRouter.use((req, res, next) => {
 // all routes here are protected
 
 adminRouter.get('/', (req, res) => {
-    res.render('admin')
+    res.render('admin', {name: req.session.user.name})
+})
+
+adminRouter.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 })
 
 
