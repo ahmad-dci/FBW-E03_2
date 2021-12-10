@@ -5,7 +5,7 @@ export const getData = async (searchWord) => {
     let obj = {
         "requests": [{
             "indexName": "ikea",
-            "params": "query=" + searchWord + "&hitsPerPage=" + numInPage + "&page=" + pageNum
+            "params": "query=" + searchWord + "&hitsPerPage=" + numInPage + "&page=" + pageNum 
         }]
     };
     const response = await fetch(url, {

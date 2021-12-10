@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { StorageContext } from '../contexts';
 import Stars from './stars';
+import {Link} from 'react-router-dom'
 export default function Results() {
     const { mainState } = useContext(StorageContext);
 
@@ -22,7 +23,7 @@ export default function Results() {
                             <h5 className="card-title">{product.name}</h5>
                             <h6>{product.price} Euro</h6>
                             <Stars rate={product.rating} />
-                            <a href="#" className="btn btn-primary">Details</a>
+                            <Link to={`/products/${product.ikea_id}`} className="btn btn-primary">Details</Link>
                         </div>
                     </div>
                 </div>
