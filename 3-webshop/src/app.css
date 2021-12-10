@@ -1,0 +1,14 @@
+.gray-star, .gold-star{
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+}
+
+.gray-star{
+    background-image: url('./images/gray_star.png');
+}
+.gold-star{
+    background-image: url('./images/gold_star.png');
+}
