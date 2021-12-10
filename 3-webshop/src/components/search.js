@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { getData } from '../api';
 import { StorageContext } from '../contexts';
-import { doneAction } from '../actions';
+import { doneAction, noDataAction } from '../actions';
 
 export default function Search() {
     // to make input controlled input we need to use useState hook 
@@ -17,7 +17,12 @@ export default function Search() {
         //alert(searchWord)
         const data = await getData(searchWord)
         console.log(data.results[0].hits);
-        setMainState(doneAction(data.results[0].hits))
+        if (data.results[0].hits.length){
+            setMainState(doneAction(data.results[0].hits))
+        } else {
+            setMainState(noDataAction())
+        }
+        
 
     }
     

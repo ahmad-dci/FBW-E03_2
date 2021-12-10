@@ -4,3 +4,9 @@ export const doneAction = (data) => {
         payload: data
     }
 }
+
+export const noDataAction = () => {
+    return {
+        type: 'NO_DATA'
+    }
+}

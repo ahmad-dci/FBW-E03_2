@@ -12,6 +12,13 @@ export const reducer = (state = storage, action) => {
                 dataStatus: 'done'
             }
             return state;
+        case 'NO_DATA':
+            state = {
+                ...state,
+                products: [],
+                dataStatus: 'nodata'
+            }
+            return state;
     
         default:
             return state;
