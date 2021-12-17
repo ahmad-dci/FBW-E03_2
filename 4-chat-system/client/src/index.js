@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { StorageProvider } from './contexts';
 
 import Home from './components/home';
+import Chat from './components/chat';
 export default function App() {
 
     return (
@@ -15,6 +16,7 @@ export default function App() {
             </div>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/chat" element={<Chat />} />
             </Routes>
             </StorageProvider>
         </Router>

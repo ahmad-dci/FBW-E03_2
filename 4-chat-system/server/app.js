@@ -6,6 +6,21 @@ const app = express();
 app.use(cors());
 // accept  requests from the same origin
 // app.use(cors({ origin: 'http://localhost:3000' }));
+
+// set up socket io listener
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', (socket) => {
+    socket.on('room', (data) => {
+        console.log(data);
+        socket.join(data.roomName);
+        socket.broadcast.to(data.roomName).emit('message', {...data, message: 'has joined the room'})
+    })
+    socket.on('message', (data) => {
+        socket.broadcast.to(data.roomName).emit('message', data)
+    })
+})
+
 app.use(express.static('public'));
 const port = process.env.PORT || 4000;
 
@@ -32,6 +47,6 @@ app.get('*', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 })
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 })
