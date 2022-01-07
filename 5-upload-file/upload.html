@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload file to server</title>
+</head>
+<body>
+    Book name: 
+    <input id="book-name" type="text" placeholder="book name">
+    <br>
+    Book author: 
+    <input id="book-author" type="text" placeholder="book author">
+    <br>
+    Book file: 
+    <input id="book-file" type="file">
+    <br>
+    <button id="post-btn" >submit</button>
+
+
+    <script>
+        // get html elements
+        const bookNameElement = document.querySelector('#book-name');
+        const bookAuthorElement = document.querySelector('#book-author');
+        const bookFileElement = document.querySelector('#book-file');
+        const postBtn = document.querySelector('#post-btn');
+        // add event listener to post btn
+        postBtn.addEventListener('click', function(){
+            // get book name
+            const bookName = bookNameElement.value;
+            // get book author
+            const bookAuthor = bookAuthorElement.value;
+            // get book file
+            const bookFile = bookFileElement.files[0];
+            // create form data
+            const formData = new FormData();
+            formData.append('bookName', bookName);
+            formData.append('bookAuthor', bookAuthor);
+            formData.append('bookFile', bookFile);
+            // send data to server side using fetch
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                
+            }).catch(error => {
+                console.log(error);
+            })
+        });
+    </script>
+    
+</body>
+</html>
