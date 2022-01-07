@@ -22,6 +22,14 @@ app.get('/upload', (req, res) => {
 });
 app.post('/upload', (req, res) => {
     console.log(req.body);
+    console.log(req.files);
+    if(req.files !== null) {
+        req.files.bookFile.mv(__dirname + '/public/' + req.files.bookFile.name).then(() => {
+            res.json('done')
+        }).catch(error => {
+            res.json(error)
+        })
+    }
 })
 
 app.listen(PORT, () => {
