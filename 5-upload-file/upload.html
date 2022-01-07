@@ -14,7 +14,7 @@
     <input id="book-author" type="text" placeholder="book author">
     <br>
     Book file: 
-    <input id="book-file" type="file">
+    <input id="book-file" type="file" accept="image/png, image/gif, image/jpeg">
     <br>
     <button id="post-btn" >submit</button>
 
@@ -43,7 +43,9 @@
                 method: 'POST',
                 body: formData
             }).then(response => {
-                
+                response.json().then(data => {
+                    console.log(data);
+                });
             }).catch(error => {
                 console.log(error);
             })
